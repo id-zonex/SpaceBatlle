@@ -1,0 +1,7 @@
+C:\Users\tester\source\repos\SpaceBatlle\bin\Debug\SpaceBatlle.exe.config
+C:\Users\tester\source\repos\SpaceBatlle\bin\Debug\SpaceBatlle.exe
+C:\Users\tester\source\repos\SpaceBatlle\bin\Debug\SpaceBatlle.pdb
+C:\Users\tester\source\repos\SpaceBatlle\obj\Debug\SpaceBatlle.csproj.CoreCompileInputs.cache
+C:\Users\tester\source\repos\SpaceBatlle\obj\Debug\SpaceBatlle.exe
+C:\Users\tester\source\repos\SpaceBatlle\obj\Debug\SpaceBatlle.pdb
+C:\Users\tester\source\repos\SpaceBatlle\obj\Debug\SpaceBatlle.csprojAssemblyReference.cache
