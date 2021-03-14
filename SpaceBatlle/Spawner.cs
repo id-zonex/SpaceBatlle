@@ -11,6 +11,10 @@ namespace SpaceBatlle
         private static Vector2 _minSpawnPoint = new Vector2(3, 5);
         private static Vector2 _maxSpawnPoint = new Vector2(Program.Scale.x - 5, 5);
 
+        private static List<ISpawnable> _spawnables = new List<ISpawnable>(10);
+
+        private static ISpawnable[] PossibleOptionsScripts = new ISpawnable[] { new AIControlerBase(), };
+
         private static int count = 0;
 
         public static void Spawn()
@@ -26,7 +30,7 @@ namespace SpaceBatlle
 
         }
 
-        public static void WriteAllEnemies()
+        public static void ControleAllEnemies()
         {
             for (int i = 0; i < Enemies.Count; i++)
             {
@@ -45,6 +49,16 @@ namespace SpaceBatlle
             var Ypos = new Random().Next(_minSpawnPoint.y, _maxSpawnPoint.y);
 
             return new Vector2(Xpos, Ypos);
+        }
+
+        private static List<ISpawnable> FillInTheList()
+        {
+            for (int i = 0; i < _spawnables.Count; i++)
+            {
+                _spawnables[i] = PossibleOptionsScripts[new Random().Next(PossibleOptionsScripts.Length)];
+            }
+
+            return _spawnables;
         }
 
     }

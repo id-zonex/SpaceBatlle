@@ -6,14 +6,22 @@ using System.Threading.Tasks;
 
 namespace SpaceBatlle
 {
-    class AIControlerBase
+    public interface ISpawnable
+    {
+        void Spawn();
+        void ControleAllEnemies();
+    }
+
+    class AIControlerBase : ISpawnable
     {
         public List<Enemy> Enemies = new List<Enemy>();
 
-        public List<Vector2> SpawnPoints = new List<Vector2>() { new Vector2(5, 5), new Vector2(10, 5), new Vector2(15, 5), new Vector2(20, 5), new Vector2(25, 5),
-                                                                 new Vector2(5, 10), new Vector2(10, 10), new Vector2(15, 10), new Vector2(20, 10), new Vector2(25, 10),
-                                                                 new Vector2(5, 15), new Vector2(10, 15), new Vector2(15, 15), new Vector2(20, 15), new Vector2(25, 15),
-                                                               };                
+        public List<Vector2> SpawnPoints = new List<Vector2>() 
+        { 
+            new Vector2(5, 5), new Vector2(10, 5), new Vector2(15, 5), new Vector2(20, 5), new Vector2(25, 5),
+            new Vector2(5, 10), new Vector2(10, 10), new Vector2(15, 10), new Vector2(20, 10), new Vector2(25, 10),
+            new Vector2(5, 15), new Vector2(10, 15), new Vector2(15, 15), new Vector2(20, 15), new Vector2(25, 15),
+        };                
 
         public int count = 0;
 
@@ -30,7 +38,7 @@ namespace SpaceBatlle
 
         }
 
-        public void WriteAllEnemies()
+        public void ControleAllEnemies()
         {
             for (int i = 0; i < Enemies.Count; i++)
             {

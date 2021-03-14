@@ -52,7 +52,7 @@ namespace SpaceBatlle
         {
             Scale = new Vector2(_datafullWigith, _datafullHeigith);
 
-            _player = = new Player(new Vector2(Scale.x / 2, Scale.y - 5), new Vector2(3, 3));
+            _player = new Player(new Vector2(Scale.x / 2, Scale.y - 5), new Vector2(3, 3));
 
             Console.CursorVisible = false;
             map = GenerateMap(Scale.x, Scale.y);
@@ -93,7 +93,7 @@ namespace SpaceBatlle
         private static void Write()
         {
             _player.gun.WriteBullets();
-            Spawner.WriteAllEnemies();
+            Spawner.ControleAllEnemies();
         }
 
         private static void WriteMap()
