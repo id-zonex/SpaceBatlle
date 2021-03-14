@@ -9,7 +9,7 @@ namespace SpaceBatlle
         public static List<Enemy> Enemies = new List<Enemy>();
 
         private static Vector2 _minSpawnPoint = new Vector2(3, 5);
-        private static Vector2 _maxSpawnPoint = new Vector2(47, 5);
+        private static Vector2 _maxSpawnPoint = new Vector2(Program.Scale.x - 5, 5);
 
         private static int count = 0;
 
@@ -32,8 +32,10 @@ namespace SpaceBatlle
             {
                 Enemy enemy = Enemies[i];
 
-                enemy.Controller();
-                enemy.Write();
+                if ((int)DateTime.Now.Subtract(new DateTime(2020, 1, 1)).TotalSeconds - enemy.StartTime > new Random().Next(2, 4))
+                {
+                    enemy.Controller();
+                }
             }
         }
 

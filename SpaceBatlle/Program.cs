@@ -20,20 +20,17 @@ namespace SpaceBatlle
 
     class Program
     {
+        public static Vector2 Scale;
+
         private static int _datafullWigith = 50;
         private static int _datafullHeigith = 20;
 
-        private static Vector2 scale;
-
         private static char[,] map;
 
-        private static char[] _stopedBloks = new char[1] { '#' };
-
-        private static Player _player = new Player(new Vector2(_datafullWigith / 2, _datafullHeigith -5), new Vector2(3, 3));
+        private static Player _player;
 
         static void Main(string[] args)
-        {
-            
+        {  
             Init(args);
         }
 
@@ -53,10 +50,12 @@ namespace SpaceBatlle
 
         private static void Init(string[] args)
         {
-            scale = GetMapScale(args);
+            Scale = new Vector2(_datafullWigith, _datafullHeigith);
+
+            _player = = new Player(new Vector2(Scale.x / 2, Scale.y - 5), new Vector2(3, 3));
 
             Console.CursorVisible = false;
-            map = GenerateMap(scale.x, scale.y);
+            map = GenerateMap(Scale.x, Scale.y);
 
             Console.Clear();
             WriteMap();
@@ -69,7 +68,7 @@ namespace SpaceBatlle
                 _player.Controller();
 
                 Write();
-                Thread.Sleep(60);
+                Thread.Sleep(20);
             }
         }
 
@@ -114,21 +113,25 @@ namespace SpaceBatlle
 
         private static Vector2 GetMapScale(string[] data)
         {
-            Vector2 result = new Vector2();
-            try
-            {
-                result.x = data[0] != null ? result.x = int.Parse(data[0]) : _datafullWigith;
-                result.y = data[1] != null ? result.y = int.Parse(data[1]) : _datafullHeigith;
-            }
-            catch(IndexOutOfRangeException)
-            {
-                result.x = _datafullWigith;
-                result.y = _datafullHeigith;
-            }
+            Vector2 result = new Vector2(_datafullWigith, _datafullHeigith);
 
             return result;
         }
 
 
     }
+
+    //Vector2 result = new Vector2();
+    //try
+    //{
+    //    result.x = data[0] != null ? result.x = int.Parse(data[0]) : _datafullWigith;
+    //    result.y = data[1] != null ? result.y = int.Parse(data[1]) : _datafullHeigith;
+    //}
+    //catch(Exception)
+    //{
+    //    result.x = _datafullWigith;
+    //    result.y = _datafullHeigith;
+    //}
+
+    //return result;
 }

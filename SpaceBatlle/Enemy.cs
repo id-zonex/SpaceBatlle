@@ -9,14 +9,21 @@ namespace SpaceBatlle
     { 
         public BoxColider colider;
 
-        private int speed;
+        public int StartTime;
 
-        private Vector2 oldPos;
+        public Vector2 SpawnPoint;
+
+        private int _speed;
+
+        private Vector2 _oldPos;
+
 
         public Enemy(int speed, Vector2 position, Vector2 scale) : base(position, scale)
         {
+            StartTime = (int)DateTime.Now.Subtract(new DateTime(2021, 1, 1)).TotalSeconds;
+
             colider = new BoxColider(0, 0, 3, 3, this);
-            this.speed = speed;
+            this._speed = speed;
 
             Sprite = new char[,]
             {
@@ -28,18 +35,18 @@ namespace SpaceBatlle
         }
 
 
+
         public override void Controller()
         {
-            if (new Random().Next(100) > 90)
-            {
-                oldPos = position;
+            _oldPos = position;
 
-                DelOldCharacter(oldPos);
+            DelOldCharacter(_oldPos);
 
-                Move(new Vector2(0, speed));
-                Write();
-            }
-           
+            Move(new Vector2(0, _speed));
+            Write();
+
+            StartTime = (int)DateTime.Now.Subtract(new DateTime(2020, 1, 1)).TotalSeconds;
+
         }
 
         public override void Move(Vector2 nextPos)
@@ -53,7 +60,7 @@ namespace SpaceBatlle
                 position.y = testPosY;
             }
 
-            if (position.y == 18)
+            if (position.y > Program.Scale.y)
             {
                 Destroy();
             }

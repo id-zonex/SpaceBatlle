@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI.cs" />
     <Compile Include="BoxColider.cs" />
     <Compile Include="Characters.cs" />
     <Compile Include="Enemy.cs" />
