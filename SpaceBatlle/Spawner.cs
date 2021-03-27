@@ -6,41 +6,43 @@ namespace SpaceBatlle
 {
     static class Spawner
     {
+        public delegate void EndDelegate();
+
         public static List<Enemy> Enemies = new List<Enemy>();
+
+        public static AIControlerBase CurrentSpawner;
 
         private static Vector2 _minSpawnPoint = new Vector2(3, 5);
         private static Vector2 _maxSpawnPoint = new Vector2(Program.Scale.x - 5, 5);
 
-        private static List<ISpawnable> _spawnables = new List<ISpawnable>(10);
+        private static readonly int _spawnersCount = 2;
 
-        private static ISpawnable[] PossibleOptionsScripts = new ISpawnable[] { new AIControlerBase(), };
+        private static List<AIControlerBase> _spawnables = new List<AIControlerBase>(_spawnersCount);
 
-        private static int count = 0;
+        private static AIControlerBase[] _possibleOptionsScripts = new AIControlerBase[] { new AIControlerBase(), };
+
+        private static int  _currentSpawnerIndex = 0;
+
 
         public static void Spawn()
         {
-            if(count < 10)
-            {
-                Vector2 randPos = SelectRandomPos();
-
-                Enemy enemy = new Enemy(1, randPos, new Vector2(3, 3));
-                Enemies.Add(enemy);
-                count++;
-            }
-
+            _spawnables = FillInTheList();
         }
 
-        public static void ControleAllEnemies()
+        public static void Controle()
         {
-            for (int i = 0; i < Enemies.Count; i++)
-            {
-                Enemy enemy = Enemies[i];
+            CurrentSpawner = _spawnables[_currentSpawnerIndex];
 
-                if ((int)DateTime.Now.Subtract(new DateTime(2020, 1, 1)).TotalSeconds - enemy.StartTime > new Random().Next(2, 4))
-                {
-                    enemy.Controller();
-                }
+            if(CurrentSpawner.IsSpawned)
+            {
+                CurrentSpawner.ControleAllEnemies();
             }
+            else
+            {
+                CurrentSpawner.Spawn();
+                TryAddNewListener();
+            }
+          
         }
 
         private static Vector2 SelectRandomPos()
@@ -51,14 +53,26 @@ namespace SpaceBatlle
             return new Vector2(Xpos, Ypos);
         }
 
-        private static List<ISpawnable> FillInTheList()
+        private static List<AIControlerBase> FillInTheList()
         {
-            for (int i = 0; i < _spawnables.Count; i++)
+            for (int i = 0; i < 10; i++)
             {
-                _spawnables[i] = PossibleOptionsScripts[new Random().Next(PossibleOptionsScripts.Length)];
+                _spawnables.Add(_possibleOptionsScripts[new Random().Next(_possibleOptionsScripts.Length)]);
             }
 
             return _spawnables;
+        }
+
+        private static void TryAddNewListener()
+        {
+            if(!(_currentSpawnerIndex++ >= _spawnersCount))
+            {
+                CurrentSpawner.EndEvent += new EndDelegate(_spawnables[_currentSpawnerIndex++].Spawn);
+            }
+            else
+            {
+                Environment.Exit(0);
+            }
         }
 
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 
 namespace SpaceBatlle
@@ -59,6 +58,10 @@ namespace SpaceBatlle
                 position.x = testPosX;
                 position.y = testPosY;
             }
+            else
+            {
+                Destroy();
+            }
 
             if (position.y > Program.Scale.y)
             {
@@ -69,7 +72,7 @@ namespace SpaceBatlle
         public void Destroy()
         {
             DelOldCharacter(position);
-            Spawner.Enemies.Remove(this);
+            Spawner.CurrentSpawner.Enemies.Remove(this);
         }
 
     }

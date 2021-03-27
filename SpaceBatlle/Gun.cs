@@ -67,9 +67,9 @@ namespace SpaceBatlle
 
         private void CheckColision()
         {
-            for (int i = 0; i < Spawner.Enemies.Count; i++)
+            for (int i = 0; i < Spawner.CurrentSpawner.Enemies.Count; i++)
             {
-                Enemy enemy = Spawner.Enemies[i];
+                Enemy enemy = Spawner.CurrentSpawner.Enemies[i];
 
                  if (colider.Intersect(enemy))
                  {

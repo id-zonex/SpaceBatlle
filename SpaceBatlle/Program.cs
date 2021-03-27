@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace SpaceBatlle
@@ -62,9 +59,8 @@ namespace SpaceBatlle
 
             while (true)
             {
-                Thread spawner = new Thread(new ThreadStart(Spawner.Spawn));
+                Spawner.Spawn();
 
-                spawner.Start();
                 _player.Controller();
 
                 Write();
@@ -93,7 +89,7 @@ namespace SpaceBatlle
         private static void Write()
         {
             _player.gun.WriteBullets();
-            Spawner.ControleAllEnemies();
+            Spawner.Controle();
         }
 
         private static void WriteMap()

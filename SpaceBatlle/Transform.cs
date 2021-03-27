@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SpaceBatlle
+﻿namespace SpaceBatlle
 {
     class Transform
     {
